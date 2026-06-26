@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<!-- Forces desktop-width rendering on mobile (like "Request Desktop Site") -->
+<meta name="viewport" content="width=1100, initial-scale=1.0"/>
 <title>Harish K — AI Developer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -266,7 +267,6 @@ section {
   display:flex; flex-direction:column; align-items:center; gap:8px;
   font-size:11px; color:var(--text3); letter-spacing:1px; text-transform:uppercase; z-index:1;
   animation:fadeUp 0.8s ease 1.2s both;
-  pointer-events:none;
 }
 .scroll-mouse { width:20px; height:32px; border:2px solid var(--text3); border-radius:12px; display:flex; justify-content:center; padding-top:5px; }
 .scroll-dot { width:3px; height:7px; background:#fff; border-radius:2px; animation:sdot 1.8s ease infinite; }
@@ -698,12 +698,45 @@ footer {
 /* ══════════════════════════════════════
    SCROLL REVEAL
 ══════════════════════════════════════ */
-.reveal { opacity:0; transform:translateY(32px); transition:opacity 0.65s ease, transform 0.65s ease; pointer-events:none; }
-.reveal.visible { opacity:1; transform:translateY(0); pointer-events:auto; }
+.reveal { opacity:0; transform:translateY(32px); transition:opacity 0.65s ease, transform 0.65s ease; }
+.reveal.visible { opacity:1; transform:translateY(0); }
 .rd1 { transition-delay:0.08s; }
 .rd2 { transition-delay:0.16s; }
 .rd3 { transition-delay:0.24s; }
  
+/* ══════════════════════════════════════
+   PORTRAIT LANDSCAPE OVERLAY
+══════════════════════════════════════ */
+#rotate-overlay {
+  display: none;
+  position: fixed; inset: 0; z-index: 9999;
+  background: rgba(0,0,0,0.97);
+  flex-direction: column; align-items: center; justify-content: center;
+  gap: 20px; text-align: center; padding: 32px;
+}
+#rotate-overlay .ro-icon {
+  font-size: 52px;
+  animation: rotateHint 2.5s ease-in-out infinite;
+}
+@keyframes rotateHint {
+  0%,100% { transform: rotate(0deg); }
+  40% { transform: rotate(90deg); }
+  60% { transform: rotate(90deg); }
+}
+#rotate-overlay h2 {
+  font-size: 22px; font-weight: 800; color: #fff; letter-spacing: -0.4px;
+}
+#rotate-overlay p {
+  font-size: 14px; color: var(--text2); max-width: 280px; line-height: 1.6;
+}
+#rotate-overlay .ro-skip {
+  margin-top: 12px; background: none; border: 1px solid rgba(255,255,255,0.3);
+  color: var(--text2); font-size: 12px; font-weight: 600; letter-spacing: 0.5px;
+  padding: 10px 24px; border-radius: 980px; cursor: pointer;
+  font-family: 'Inter', sans-serif; transition: all 0.2s;
+}
+#rotate-overlay .ro-skip:hover { border-color: #fff; color: #fff; }
+
 /* ══════════════════════════════════════
    RESPONSIVE
 ══════════════════════════════════════ */
@@ -715,22 +748,31 @@ footer {
   .spec-strip { flex-wrap:wrap; gap:18px 0; }
   .spec-item { flex:1 1 40%; }
 }
- 
+
 @media (max-width:700px) {
   nav { padding:0 18px; }
   .nav-links, .nav-actions { display:none; }
   .nav-hamburger { display:flex; }
   .mobile-nav { display:flex; }
-  #hero { padding:110px 16px 60px; }
+  #hero { padding:110px 16px 50px; }
+  section { padding:90px 16px 56px; }
   .skills-bento { grid-template-columns:1fr; }
   .hack-bento { grid-template-columns:1fr; }
   .hack-card.highlight { grid-column:span 1; flex-direction:column; align-items:flex-start; gap:12px; }
-  .edu-row { padding:24px 4px; }
-  .edu-row-right { width:100%; justify-content:flex-end; }
-  .project-header { padding:24px 20px 16px; }
-  .project-footer { padding:16px 20px 20px; }
-  .proj-detail-inner { grid-template-columns:1fr; padding:20px; }
-  section { padding:100px 16px 64px; }
+  .about-bento { gap:10px; }
+  .about-main { padding:24px 20px; }
+  .about-info-grid { grid-template-columns:1fr 1fr; gap:8px; }
+  .info-tile.span2 { grid-column:span 2; }
+  .quote-glass, .spec-glass { padding:20px; }
+  .edu-row { padding:20px 4px; gap:14px; }
+  .edu-row-left { min-width:0; flex:1; }
+  .edu-row-right { flex-shrink:0; }
+  .edu-school { font-size:14px; }
+  .edu-stat-val { font-size:clamp(20px,5vw,28px); }
+  .project-header { padding:22px 18px 14px; }
+  .project-footer { padding:14px 18px 18px; }
+  .proj-detail-inner { grid-template-columns:1fr; padding:18px 16px; gap:20px; }
+  .proj-screenshots { padding:0 18px 22px; }
   .spec-strip { padding:20px 0; }
   .spec-item { flex:1 1 100%; padding:10px 0; }
   .spec-item + .spec-item::before { display:none; }
@@ -738,9 +780,25 @@ footer {
   .proj-link { min-height:44px; padding:12px 22px; }
   .hero-ctas { gap:10px; }
   .hero-ctas a { flex:1; text-align:center; justify-content:center; }
-  .proj-screenshots { padding:0 20px 24px; }
+  .contact-grid { grid-template-columns:1fr; }
+  .contact-form-panel { padding:24px 18px 20px; }
+  .form-row { grid-template-columns:1fr; }
+  .form-group.full { grid-column:span 1; }
+  .section-title { font-size:clamp(28px,7vw,44px); }
+  .hero-name { font-size:clamp(44px,12vw,72px); letter-spacing:-2px; }
+  .hero-desc { font-size:15px; }
+  .hack-card { padding:18px 20px; }
+  .impact-grid { grid-template-columns:1fr 1fr; }
+  .proj-num { font-size:10px; }
+  .proj-title { font-size:clamp(18px,4.5vw,24px); }
 }
- 
+
+@media (max-width:400px) {
+  .hero-name { font-size:clamp(36px,11vw,60px); }
+  nav { padding:0 14px; }
+  .spec-val { font-size:20px; }
+}
+
 @media (prefers-reduced-motion:reduce) {
   *,*::before,*::after { animation:none!important; transition:none!important; }
 }
@@ -1481,10 +1539,8 @@ typeWriter();
 const revEls=document.querySelectorAll('.reveal');
 const obs=new IntersectionObserver(entries=>{
   entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
-},{threshold:0.05,rootMargin:'0px 0px 0px 0px'});
+},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
 revEls.forEach(el=>obs.observe(el));
-// Safety: make all reveals visible after 2s in case observer misses any
-setTimeout(()=>{ revEls.forEach(el=>el.classList.add('visible')); }, 2000);
  
 // ── PROJECT TOGGLE ──
 function toggleProject(card){
@@ -1518,6 +1574,42 @@ function submitContactForm() {
 // ── MOBILE NAV ──
 function toggleMobileNav(){ document.getElementById('mobileNav').classList.toggle('open'); }
 function closeMobileNav(){ document.getElementById('mobileNav').classList.remove('open'); }
+
+// ── PORTRAIT ORIENTATION OVERLAY ──
+(function(){
+  var overlay = document.createElement('div');
+  overlay.id = 'rotate-overlay';
+  overlay.innerHTML = [
+    '<div class="ro-icon">📱</div>',
+    '<h2>Rotate for Best Experience</h2>',
+    '<p>This portfolio looks best in <strong style="color:#fff">landscape mode</strong>. Please rotate your device.</p>',
+    '<button class="ro-skip" onclick="dismissRotateOverlay()">Continue in Portrait</button>'
+  ].join('');
+  document.body.appendChild(overlay);
+
+  var dismissed = false;
+
+  window.dismissRotateOverlay = function() {
+    dismissed = true;
+    overlay.style.display = 'none';
+  };
+
+  function checkOrientation() {
+    var isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent) ||
+                   (navigator.maxTouchPoints > 1 && window.innerWidth < 900);
+    if (!isMobile) { overlay.style.display = 'none'; return; }
+    var isPortrait = window.innerHeight > window.innerWidth;
+    if (isPortrait && !dismissed) {
+      overlay.style.display = 'flex';
+    } else {
+      overlay.style.display = 'none';
+    }
+  }
+
+  window.addEventListener('resize', checkOrientation);
+  window.addEventListener('orientationchange', function(){ setTimeout(checkOrientation, 200); });
+  checkOrientation();
+})();
  
 // ── STOP PROPAGATION on inner interactive elements ──
 document.querySelectorAll('.proj-link, .screenshot-frame, .project-footer, .project-detail').forEach(el => {
