@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=1200"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0"/>
 <title>Harish K — AI Developer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -675,12 +675,7 @@ section {
 .success-title { font-size: 20px; font-weight: 700; color: var(--text); letter-spacing: -0.3px; }
 .success-desc { font-size: 14px; color: var(--text2); }
  
-@media (max-width: 820px) {
-  .contact-grid { grid-template-columns: 1fr; }
-  .contact-form-panel { padding: 28px 22px 24px; }
-  .form-row { grid-template-columns: 1fr 1fr; }
-  .form-group.full { grid-column: span 2; }
-}
+/* contact responsive handled in main @media blocks above */
  
 /* ══════════════════════════════════════
    FOOTER
@@ -704,7 +699,7 @@ footer {
 .rd3 { transition-delay:0.24s; }
  
 /* ══════════════════════════════════════
-   RESPONSIVE
+   RESPONSIVE — tablet
 ══════════════════════════════════════ */
 @media (max-width:1000px) {
   .about-bento { grid-template-columns:1fr; }
@@ -713,10 +708,96 @@ footer {
   .hack-card.highlight { grid-column:span 2; }
   .spec-strip { flex-wrap:wrap; gap:18px 0; }
   .spec-item { flex:1 1 40%; }
+  .contact-grid { grid-template-columns:1fr; }
+  .contact-form-panel { padding:28px 22px 24px; }
 }
  
-/* Mobile breakpoints removed — viewport is locked to 1200px desktop width.
-   All devices render the full desktop layout and can pinch-to-zoom. */
+/* ══════════════════════════════════════
+   RESPONSIVE — mobile  (≤ 700 px)
+   True adaptive layout — fills the screen
+   properly instead of forcing desktop zoom
+══════════════════════════════════════ */
+@media (max-width:700px) {
+ 
+  /* --- NAV --- */
+  nav { padding:0 16px; height:56px; }
+  .nav-links, .nav-actions { display:none; }
+  .nav-hamburger { display:flex; }
+  .mobile-nav { display:flex; }
+  .nav-name { font-size:13px; }
+ 
+  /* --- SECTIONS --- */
+  section { padding:80px 16px 52px; }
+ 
+  /* --- HERO --- */
+  #hero { padding:80px 16px 52px; min-height:auto; }
+  .hero-name { font-size:clamp(36px,11vw,60px); letter-spacing:-2px; }
+  .hero-role-line { font-size:clamp(14px,4vw,18px); }
+  .hero-desc { font-size:14px; }
+  .hero-ctas { gap:10px; }
+  .hero-ctas a { flex:1; text-align:center; justify-content:center; min-height:48px; font-size:13px; padding:12px 18px; }
+  .hero-social { gap:8px; }
+  .social-chip { font-size:11px; padding:7px 13px; }
+  .spec-strip { padding:18px 0; flex-direction:column; gap:0; }
+  .spec-item { flex:1 1 100%; padding:12px 0; text-align:center; }
+  .spec-item + .spec-item::before { display:none; }
+  .spec-item:not(:last-child) { border-bottom:1px solid var(--border-soft); }
+  .scroll-down { display:none; }
+ 
+  /* --- ABOUT --- */
+  .about-bento { grid-template-columns:1fr; gap:12px; }
+  .about-main { padding:24px 20px; }
+  .about-subtitle { font-size:18px; }
+  .about-body { font-size:14px; }
+  .about-info-grid { grid-template-columns:1fr 1fr; gap:8px; }
+  .info-tile.span2 { grid-column:span 2; }
+ 
+  /* --- SKILLS --- */
+  .skills-bento { grid-template-columns:1fr; gap:12px; }
+  .skill-card { padding:20px; }
+ 
+  /* --- PROJECTS --- */
+  .project-header { padding:20px 18px 14px; }
+  .proj-title { font-size:clamp(17px,5vw,22px); }
+  .proj-desc { font-size:14px; }
+  .project-footer { padding:14px 18px 18px; flex-wrap:wrap; gap:10px; }
+  .proj-link { min-height:44px; padding:11px 20px; font-size:12px; }
+  .proj-detail-inner { grid-template-columns:1fr; padding:18px; gap:20px; }
+  .proj-screenshots { padding:0 18px 20px; }
+  .screenshot-frame { width:260px; height:165px; }
+ 
+  /* --- ACHIEVEMENTS --- */
+  .hack-bento { grid-template-columns:1fr; gap:12px; }
+  .hack-card.highlight { grid-column:span 1; flex-direction:column; align-items:flex-start; gap:12px; }
+  .hack-card.highlight .hack-title { font-size:17px; }
+ 
+  /* --- EDUCATION --- */
+  .edu-row { padding:18px 8px; flex-direction:column; align-items:flex-start; gap:14px; }
+  .edu-row-left { min-width:unset; }
+  .edu-row-right { width:100%; justify-content:flex-start; }
+  .edu-stat-val { font-size:clamp(22px,6vw,28px); }
+ 
+  /* --- CONTACT --- */
+  .contact-grid { grid-template-columns:1fr; gap:14px; }
+  .contact-form-panel { padding:22px 16px 20px; }
+  .form-row { grid-template-columns:1fr; gap:12px; }
+  .form-group.full { grid-column:span 1; }
+  .contact-send-btn { padding:14px; font-size:13px; }
+ 
+  /* --- SECTION TITLES --- */
+  .section-title { font-size:clamp(26px,8vw,40px); letter-spacing:-1px; }
+  .section-sub { font-size:14px; margin-bottom:36px; }
+}
+ 
+/* ══════════════════════════════════════
+   RESPONSIVE — small phones (≤ 400 px)
+══════════════════════════════════════ */
+@media (max-width:400px) {
+  .hero-name { font-size:clamp(30px,12vw,44px); }
+  .about-info-grid { grid-template-columns:1fr; }
+  .info-tile.span2 { grid-column:span 1; }
+  .screenshot-frame { width:220px; height:140px; }
+}
  
 @media (prefers-reduced-motion:reduce) {
   *,*::before,*::after { animation:none!important; transition:none!important; }
