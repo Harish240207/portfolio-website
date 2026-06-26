@@ -266,6 +266,7 @@ section {
   display:flex; flex-direction:column; align-items:center; gap:8px;
   font-size:11px; color:var(--text3); letter-spacing:1px; text-transform:uppercase; z-index:1;
   animation:fadeUp 0.8s ease 1.2s both;
+  pointer-events:none;
 }
 .scroll-mouse { width:20px; height:32px; border:2px solid var(--text3); border-radius:12px; display:flex; justify-content:center; padding-top:5px; }
 .scroll-dot { width:3px; height:7px; background:#fff; border-radius:2px; animation:sdot 1.8s ease infinite; }
@@ -697,8 +698,8 @@ footer {
 /* ══════════════════════════════════════
    SCROLL REVEAL
 ══════════════════════════════════════ */
-.reveal { opacity:0; transform:translateY(32px); transition:opacity 0.65s ease, transform 0.65s ease; }
-.reveal.visible { opacity:1; transform:translateY(0); }
+.reveal { opacity:0; transform:translateY(32px); transition:opacity 0.65s ease, transform 0.65s ease; pointer-events:none; }
+.reveal.visible { opacity:1; transform:translateY(0); pointer-events:auto; }
 .rd1 { transition-delay:0.08s; }
 .rd2 { transition-delay:0.16s; }
 .rd3 { transition-delay:0.24s; }
@@ -1480,8 +1481,10 @@ typeWriter();
 const revEls=document.querySelectorAll('.reveal');
 const obs=new IntersectionObserver(entries=>{
   entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
-},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+},{threshold:0.05,rootMargin:'0px 0px 0px 0px'});
 revEls.forEach(el=>obs.observe(el));
+// Safety: make all reveals visible after 2s in case observer misses any
+setTimeout(()=>{ revEls.forEach(el=>el.classList.add('visible')); }, 2000);
  
 // ── PROJECT TOGGLE ──
 function toggleProject(card){
