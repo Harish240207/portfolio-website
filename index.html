@@ -363,11 +363,12 @@ section {
   background:var(--surface);
   border:1px solid var(--border);
   border-radius:var(--radius-xl);
-  overflow:hidden; cursor:pointer;
+  overflow:hidden; cursor:default;
   transition:border-color 0.3s, background 0.3s;
 }
 .project-card:hover { border-color:rgba(255,255,255,0.28); }
-.project-header { padding:36px 40px 0; }
+.project-header { padding:36px 40px 0; cursor:pointer; }
+.project-header:hover .proj-title { opacity:0.85; }
 .proj-num { font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--text3); margin-bottom:10px; }
 .proj-title { font-size:clamp(20px,2.5vw,27px); font-weight:800; letter-spacing:-0.6px; margin-bottom:12px; color:var(--text); }
 .proj-tag {
@@ -381,8 +382,9 @@ section {
   display:flex; align-items:center; gap:6px;
   background:none; border:none; cursor:pointer;
   color:#fff; font-size:13px; font-weight:700;
-  padding:0; margin-top:14px; transition:opacity 0.2s;
+  padding:8px 0; margin-top:10px; transition:opacity 0.2s;
   font-family:'Inter',sans-serif; letter-spacing:0.3px;
+  min-height:44px;
 }
 .proj-expand-btn:hover { opacity:0.65; }
 .proj-expand-btn .arr { transition:transform 0.3s; display:inline-block; }
@@ -724,7 +726,7 @@ footer {
   .hack-card.highlight { grid-column:span 1; flex-direction:column; align-items:flex-start; gap:12px; }
   .edu-row { padding:24px 4px; }
   .edu-row-right { width:100%; justify-content:flex-end; }
-  .project-header { padding:24px 20px 0; }
+  .project-header { padding:24px 20px 16px; }
   .project-footer { padding:16px 20px 20px; }
   .proj-detail-inner { grid-template-columns:1fr; padding:20px; }
   section { padding:100px 16px 64px; }
@@ -732,6 +734,10 @@ footer {
   .spec-item { flex:1 1 100%; padding:10px 0; }
   .spec-item + .spec-item::before { display:none; }
   .spec-item:not(:last-child) { border-bottom:1px solid var(--border-soft); padding-bottom:18px; }
+  .proj-link { min-height:44px; padding:12px 22px; }
+  .hero-ctas { gap:10px; }
+  .hero-ctas a { flex:1; text-align:center; justify-content:center; }
+  .proj-screenshots { padding:0 20px 24px; }
 }
  
 @media (prefers-reduced-motion:reduce) {
@@ -777,6 +783,7 @@ footer {
   <a href="#education"    class="mobile-link" onclick="closeMobileNav()">Education</a>
   <a href="#contact"      class="mobile-link" onclick="closeMobileNav()">Contact</a>
   <div class="mobile-actions">
+    <a href="#contact" class="mobile-hire-btn" onclick="closeMobileNav()">Hire Me</a>
     <a href="resume.pdf" download="Harish_K_Resume.pdf" class="mobile-resume-btn">Resume ↓</a>
   </div>
 </div>
@@ -987,8 +994,8 @@ footer {
   <div class="projects-list">
  
     <!-- P01 -->
-    <div class="project-card reveal" onclick="toggleProject(this)">
-      <div class="project-header">
+    <div class="project-card reveal">
+      <div class="project-header" onclick="toggleProject(this.closest('.project-card'))" style="cursor:pointer;">
         <p class="proj-num">Project 01</p>
         <h3 class="proj-title">AI Agent for Government E-Seva Services</h3>
         <span class="proj-tag tag-v">AI / Public Services</span>
@@ -1030,15 +1037,15 @@ footer {
       <div class="proj-screenshots">
         <span class="proj-screenshots-label">Project Screenshots</span>
         <div class="screenshot-track">
-          <div class="screenshot-frame" onclick="openLightbox(this)">
+          <div class="screenshot-frame" onclick="openLightbox(this,event)">
             <img src="screenshots/eseva-dashboard.png" alt="E-Seva Dashboard" onerror="this.parentElement.style.display='none'"/>
             <div class="screenshot-caption">Main Dashboard</div>
           </div>
-          <div class="screenshot-frame" onclick="openLightbox(this)">
+          <div class="screenshot-frame" onclick="openLightbox(this,event)">
             <img src="screenshots/eseva-voice.png" alt="Voice Interface" onerror="this.parentElement.style.display='none'"/>
             <div class="screenshot-caption">Multilingual Voice Interface</div>
           </div>
-          <div class="screenshot-frame" onclick="openLightbox(this)">
+          <div class="screenshot-frame" onclick="openLightbox(this,event)">
             <img src="screenshots/eseva-workflow.png" alt="Workflow" onerror="this.parentElement.style.display='none'"/>
             <div class="screenshot-caption">Automated Workflow</div>
           </div>
@@ -1057,8 +1064,8 @@ footer {
     </div>
  
     <!-- P02 -->
-    <div class="project-card reveal rd1" onclick="toggleProject(this)">
-      <div class="project-header">
+    <div class="project-card reveal rd1">
+      <div class="project-header" onclick="toggleProject(this.closest('.project-card'))" style="cursor:pointer;">
         <p class="proj-num">Project 02</p>
         <h3 class="proj-title">Foody — National Surplus Food Redistribution Platform</h3>
         <span class="proj-tag tag-c">AI / Social Impact</span>
@@ -1099,15 +1106,15 @@ footer {
       <div class="proj-screenshots">
         <span class="proj-screenshots-label">Project Screenshots</span>
         <div class="screenshot-track">
-          <div class="screenshot-frame" onclick="openLightbox(this)">
+          <div class="screenshot-frame" onclick="openLightbox(this,event)">
             <img src="screenshots/foody-home.png" alt="Foody Home" onerror="this.parentElement.style.display='none'"/>
             <div class="screenshot-caption">Login Page</div>
           </div>
-          <div class="screenshot-frame" onclick="openLightbox(this)">
+          <div class="screenshot-frame" onclick="openLightbox(this,event)">
             <img src="screenshots/foody-ngo.png" alt="NGO Dashboard" onerror="this.parentElement.style.display='none'"/>
             <div class="screenshot-caption">User Dashboard</div>
           </div>
-          <div class="screenshot-frame" onclick="openLightbox(this)">
+          <div class="screenshot-frame" onclick="openLightbox(this,event)">
             <img src="screenshots/foody-risk.png" alt="Risk Scoring" onerror="this.parentElement.style.display='none'"/>
             <div class="screenshot-caption">Hotel Menu</div>
           </div>
@@ -1126,8 +1133,8 @@ footer {
     </div>
  
     <!-- P03 -->
-    <div class="project-card reveal rd2" onclick="toggleProject(this)">
-      <div class="project-header">
+    <div class="project-card reveal rd2">
+      <div class="project-header" onclick="toggleProject(this.closest('.project-card'))" style="cursor:pointer;">
         <p class="proj-num">Project 03</p>
         <h3 class="proj-title">AI-Powered Food Demand Forecasting System</h3>
         <span class="proj-tag tag-a">AI / SDG</span>
@@ -1168,15 +1175,15 @@ footer {
       <div class="proj-screenshots">
         <span class="proj-screenshots-label">Project Screenshots</span>
         <div class="screenshot-track">
-          <div class="screenshot-frame" onclick="openLightbox(this)">
+          <div class="screenshot-frame" onclick="openLightbox(this,event)">
             <img src="screenshots/forecast-dashboard.png" alt="Forecast Dashboard" onerror="this.parentElement.style.display='none'"/>
             <div class="screenshot-caption">Admin Dashboard</div>
           </div>
-          <div class="screenshot-frame" onclick="openLightbox(this)">
+          <div class="screenshot-frame" onclick="openLightbox(this,event)">
             <img src="screenshots/forecast-chart.png" alt="Demand Chart" onerror="this.parentElement.style.display='none'"/>
             <div class="screenshot-caption">Demand Forecast Chart</div>
           </div>
-          <div class="screenshot-frame" onclick="openLightbox(this)">
+          <div class="screenshot-frame" onclick="openLightbox(this,event)">
             <img src="screenshots/forecast-rec.png" alt="Recommendations" onerror="this.parentElement.style.display='none'"/>
             <div class="screenshot-caption">Prep Recommendations</div>
           </div>
@@ -1440,8 +1447,8 @@ footer {
  
 <script>
 // ── LIGHTBOX ──
-function openLightbox(frame) {
-  event.stopPropagation();
+function openLightbox(frame, e) {
+  if (e) e.stopPropagation();
   const img = frame.querySelector('img');
   const cap = frame.querySelector('.screenshot-caption');
   if (!img || !img.src) return;
@@ -1508,6 +1515,11 @@ function submitContactForm() {
 // ── MOBILE NAV ──
 function toggleMobileNav(){ document.getElementById('mobileNav').classList.toggle('open'); }
 function closeMobileNav(){ document.getElementById('mobileNav').classList.remove('open'); }
+ 
+// ── STOP PROPAGATION on inner interactive elements ──
+document.querySelectorAll('.proj-link, .screenshot-frame, .project-footer, .project-detail').forEach(el => {
+  el.addEventListener('click', e => e.stopPropagation());
+});
 </script>
 </body>
 </html>
