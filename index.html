@@ -743,6 +743,40 @@ footer {
 @media (prefers-reduced-motion:reduce) {
   *,*::before,*::after { animation:none!important; transition:none!important; }
 }
+
+/* ===== ChatGPT Mobile Optimization Pack ===== */
+@media (max-width:1200px){
+  .projects-list,.about-bento,.contact-grid{max-width:95%;}
+}
+@media (max-width:992px){
+  .about-bento,.contact-grid{grid-template-columns:1fr!important;}
+  .skills-bento{grid-template-columns:repeat(2,1fr)!important;}
+  .hero-name{font-size:clamp(48px,9vw,72px)!important;}
+}
+@media (max-width:768px){
+  html,body{overflow-x:hidden;}
+  section{padding:90px 18px 60px!important;}
+  .hero-desc,.section-sub{font-size:15px!important;}
+  .hero-ctas,.hero-social{flex-direction:column;}
+  .hero-ctas a,.btn-primary,.btn-ghost2{width:100%;justify-content:center;}
+  .skills-bento,.hack-bento,.about-info-grid{grid-template-columns:1fr!important;}
+  .proj-detail-inner,.form-row{grid-template-columns:1fr!important;}
+  .project-header,.project-footer,.proj-screenshots{padding-left:20px!important;padding-right:20px!important;}
+  .screenshot-frame{width:280px;height:180px;}
+  .spec-strip{display:grid;grid-template-columns:1fr 1fr;}
+}
+@media (max-width:480px){
+  nav{padding:0 14px!important;}
+  .hero-name{font-size:42px!important;}
+  .hero-role-line{font-size:15px!important;}
+  .section-title{font-size:32px!important;}
+  .contact-form-panel,.about-main,.quote-glass,.spec-glass,.skill-card,.hack-card{padding:20px!important;}
+  .spec-strip{grid-template-columns:1fr;}
+  .spec-item+.spec-item:before{display:none!important;}
+  .info-tile.span2{grid-column:auto;}
+  .screenshot-frame{width:240px;height:155px;}
+}
+
 </style>
 </head>
 <body>
