@@ -117,9 +117,11 @@ nav {
   background:rgba(0,0,0,0.97); backdrop-filter:blur(16px);
   flex-direction:column; padding:18px 28px 30px;
   border-bottom:1px solid var(--border-soft);
-  opacity:0; transform:translateY(-10px); transition:all 0.25s;
+  opacity:0; transform:translateY(-10px);
+  transition:opacity 0.25s, transform 0.25s;
+  pointer-events:none; visibility:hidden;
 }
-.mobile-nav.open { opacity:1; transform:translateY(0); }
+.mobile-nav.open { opacity:1; transform:translateY(0); pointer-events:auto; visibility:visible; }
 .mobile-link { font-size:15px; color:var(--text2); text-decoration:none; padding:12px 0; border-bottom:1px solid var(--border-soft); text-transform:uppercase; letter-spacing:0.6px; }
 .mobile-link:hover { color:var(--text); }
 .mobile-actions { display:flex; gap:10px; margin-top:20px; }
@@ -367,8 +369,8 @@ section {
   transition:border-color 0.3s, background 0.3s;
 }
 .project-card:hover { border-color:rgba(255,255,255,0.28); }
-.project-header { padding:36px 40px 0; cursor:default; }
-.project-header:hover .proj-title { opacity:1; }
+.project-header { padding:36px 40px 0; cursor:pointer; }
+.project-header:hover .proj-title { opacity:0.85; }
 .proj-num { font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--text3); margin-bottom:10px; }
 .proj-title { font-size:clamp(20px,2.5vw,27px); font-weight:800; letter-spacing:-0.6px; margin-bottom:12px; color:var(--text); }
 .proj-tag {
@@ -716,24 +718,30 @@ footer {
 }
  
 @media (max-width:700px) {
+  /* Nav */
   nav { padding:0 18px; }
   .nav-links, .nav-actions { display:none; }
   .nav-hamburger { display:flex; }
-  .mobile-nav { display:flex; }
+ 
+  /* KEY FIX: mobile-nav must NOT just be display:flex — that makes the
+     invisible closed drawer sit over the whole page and swallow every tap.
+     Instead keep pointer-events:none + visibility:hidden (set on base style)
+     and only flip them via .open. We still need display:flex so flex-direction works. */
+  .mobile-nav { display:flex; pointer-events:none; visibility:hidden; }
+  .mobile-nav.open { pointer-events:auto; visibility:visible; }
  
   /* Hero */
   #hero { padding:110px 16px 60px; }
-  .hero-ctas { gap:10px; }
-  .hero-ctas a { flex:1; text-align:center; justify-content:center; min-height:48px; display:flex; align-items:center; }
+  .hero-ctas { gap:10px; flex-direction:column; }
+  .hero-ctas a { width:100%; text-align:center; justify-content:center; min-height:48px; display:flex; align-items:center; }
   .hero-social { gap:8px; }
   .social-chip { font-size:11px; padding:7px 12px; }
  
-  /* Spec strip — stack vertically, no dividers */
-  .spec-strip { padding:20px 0; flex-direction:column; gap:0; border-left:none; border-right:none; }
-  .spec-item { flex:1 1 100%; padding:14px 0; align-items:flex-start; padding-left:8px; }
+  /* Spec strip — stack vertically */
+  .spec-strip { padding:20px 0; flex-direction:column; }
+  .spec-item { flex:1 1 100%; padding:14px 0; align-items:flex-start; padding-left:12px; }
   .spec-item + .spec-item::before { display:none; }
   .spec-item:not(:last-child) { border-bottom:1px solid var(--border-soft); }
-  .spec-val { font-size:26px; }
  
   /* About */
   .about-info-grid { grid-template-columns:1fr; }
@@ -742,23 +750,24 @@ footer {
   /* Skills */
   .skills-bento { grid-template-columns:1fr; }
  
-  /* Projects — fix touch event layering */
-  .project-header { padding:24px 20px 0; }
+  /* Projects */
+  .project-header { padding:24px 20px 0; cursor:default; }
   .project-footer { padding:16px 20px 20px; }
   .proj-detail-inner { grid-template-columns:1fr; padding:20px; }
-  .proj-expand-btn { padding:14px 0; min-height:48px; }
+  .proj-expand-btn { min-height:48px; padding:14px 0; }
   .proj-link { min-height:48px; padding:12px 22px; font-size:13px; }
   .proj-screenshots { padding:0 20px 24px; }
-  .screenshot-frame { width:280px; height:180px; }
+  .screenshot-frame { width:270px; height:170px; }
+  .impact-grid { grid-template-columns:1fr 1fr; }
  
   /* Achievements */
   .hack-bento { grid-template-columns:1fr; }
   .hack-card.highlight { grid-column:span 1; flex-direction:column; align-items:flex-start; gap:12px; }
  
   /* Education */
-  .edu-row { padding:20px 4px; gap:16px; }
-  .edu-row-left { min-width:unset; }
-  .edu-row-right { width:100%; justify-content:flex-end; }
+  .edu-row { padding:20px 4px; gap:12px; }
+  .edu-row-left { min-width:unset; flex:1; }
+  .edu-row-right { width:100%; justify-content:flex-start; }
   .edu-stat-val { font-size:26px; }
  
   /* Sections */
@@ -769,10 +778,7 @@ footer {
   .contact-form-panel { padding:24px 18px 20px; }
   .form-row { grid-template-columns:1fr; }
   .form-group.full { grid-column:span 1; }
-  .contact-send-btn { min-height:52px; font-size:15px; }
- 
-  /* Impact grid on mobile */
-  .impact-grid { grid-template-columns:1fr 1fr; }
+  .contact-send-btn { min-height:52px; }
 }
  
 @media (prefers-reduced-motion:reduce) {
@@ -1030,12 +1036,12 @@ footer {
  
     <!-- P01 -->
     <div class="project-card reveal">
-      <div class="project-header">
+      <div class="project-header" onclick="toggleProject(this.closest('.project-card'))" style="cursor:pointer;">
         <p class="proj-num">Project 01</p>
         <h3 class="proj-title">AI Agent for Government E-Seva Services</h3>
         <span class="proj-tag tag-v">AI / Public Services</span>
         <p class="proj-desc">A voice-first, multilingual AI agent automating government certificate applications end-to-end — DigiLocker document fetching to legally-valid eSign via OTP. Reduces a 7–15 day process to 15 minutes, across 22 Indian languages.</p>
-        <button class="proj-expand-btn" onclick="toggleProject(this.closest('.project-card'))">Details <span class="arr">↓</span></button>
+        <button class="proj-expand-btn">Details <span class="arr">↓</span></button>
       </div>
       <div class="project-detail">
         <div class="proj-detail-inner">
@@ -1100,12 +1106,12 @@ footer {
  
     <!-- P02 -->
     <div class="project-card reveal rd1">
-      <div class="project-header">
+      <div class="project-header" onclick="toggleProject(this.closest('.project-card'))" style="cursor:pointer;">
         <p class="proj-num">Project 02</p>
         <h3 class="proj-title">Foody — National Surplus Food Redistribution Platform</h3>
         <span class="proj-tag tag-c">AI / Social Impact</span>
         <p class="proj-desc">An AI-enabled platform connecting hotels, consumers, and NGOs to redistribute surplus food safely. Real-time risk scoring, automated expiry-to-NGO transfer, and OCR-based food safety verification — reducing food wastage at scale.</p>
-        <button class="proj-expand-btn" onclick="toggleProject(this.closest('.project-card'))">Details <span class="arr">↓</span></button>
+        <button class="proj-expand-btn">Details <span class="arr">↓</span></button>
       </div>
       <div class="project-detail">
         <div class="proj-detail-inner">
@@ -1169,12 +1175,12 @@ footer {
  
     <!-- P03 -->
     <div class="project-card reveal rd2">
-      <div class="project-header">
+      <div class="project-header" onclick="toggleProject(this.closest('.project-card'))" style="cursor:pointer;">
         <p class="proj-num">Project 03</p>
         <h3 class="proj-title">AI-Powered Food Demand Forecasting System</h3>
         <span class="proj-tag tag-a">AI / SDG</span>
         <p class="proj-desc">ML-based decision support platform predicting daily food demand for college hostels using historical data and contextual signals. Gives mess administrators a clean dashboard with actionable prep insights — no ML expertise required.</p>
-        <button class="proj-expand-btn" onclick="toggleProject(this.closest('.project-card'))">Details <span class="arr">↓</span></button>
+        <button class="proj-expand-btn">Details <span class="arr">↓</span></button>
       </div>
       <div class="project-detail">
         <div class="proj-detail-inner">
@@ -1519,35 +1525,55 @@ const obs=new IntersectionObserver(entries=>{
 revEls.forEach(el=>obs.observe(el));
  
 // ── PROJECT TOGGLE ──
-// Use a flag to prevent accidental toggles from interactive children
 function toggleProject(card){
-  const isOpen=card.classList.contains('open');
-  document.querySelectorAll('.project-card.open').forEach(c=>c.classList.remove('open'));
-  if(!isOpen) card.classList.add('open');
+  const isOpen = card.classList.contains('open');
+  document.querySelectorAll('.project-card.open').forEach(c => c.classList.remove('open'));
+  if (!isOpen) card.classList.add('open');
 }
  
-// Stop propagation from ALL interactive elements inside cards so they
-// don't bubble up and accidentally toggle the card open/closed on mobile
+// Block all inner-element clicks/touches from bubbling to the card
 document.querySelectorAll(
   '.proj-link, .screenshot-frame, .project-footer, .project-detail, .proj-screenshots, .chips, .chip'
 ).forEach(el => {
-  el.addEventListener('click', e => e.stopPropagation());
+  el.addEventListener('click',    e => e.stopPropagation());
   el.addEventListener('touchend', e => e.stopPropagation());
 });
  
+// Expand buttons: handle both click AND touchend so mobile gets one clean fire
+document.querySelectorAll('.proj-expand-btn').forEach(btn => {
+  let tapped = false;
+  btn.addEventListener('touchend', function(e) {
+    e.stopPropagation();
+    e.preventDefault(); // prevent ghost click
+    tapped = true;
+    toggleProject(this.closest('.project-card'));
+    setTimeout(() => { tapped = false; }, 400);
+  }, { passive: false });
+  btn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    if (!tapped) toggleProject(this.closest('.project-card'));
+  });
+});
+ 
+// Remove the inline onclick from project-headers (they now do nothing on mobile)
+document.querySelectorAll('.project-header').forEach(h => {
+  h.removeAttribute('onclick');
+  h.style.cursor = 'default';
+});
+ 
 // ── NAV ACTIVE ──
-const secs=document.querySelectorAll('section[id]');
-const nls=document.querySelectorAll('.nav-link');
-window.addEventListener('scroll',()=>{
-  let cur='';
-  secs.forEach(s=>{ if(window.scrollY>=s.offsetTop-90) cur=s.id; });
-  nls.forEach(a=>{ a.classList.toggle('active',a.getAttribute('href').replace('#','')=== cur); });
-},{ passive:true });
+const secs = document.querySelectorAll('section[id]');
+const nls  = document.querySelectorAll('.nav-link');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  secs.forEach(s => { if (window.scrollY >= s.offsetTop - 90) cur = s.id; });
+  nls.forEach(a => { a.classList.toggle('active', a.getAttribute('href').replace('#','') === cur); });
+}, { passive: true });
  
 // ── CONTACT FORM ──
 function submitContactForm() {
-  const name = document.getElementById('contactName').value.trim();
-  const email = document.getElementById('contactEmail').value.trim();
+  const name    = document.getElementById('contactName').value.trim();
+  const email   = document.getElementById('contactEmail').value.trim();
   const subject = document.getElementById('contactSubject').value.trim();
   const message = document.getElementById('contactMessage').value.trim();
   if (!name || !email || !message) { return; }
@@ -1558,8 +1584,8 @@ function submitContactForm() {
 }
  
 // ── MOBILE NAV ──
-function toggleMobileNav(){ document.getElementById('mobileNav').classList.toggle('open'); }
-function closeMobileNav(){ document.getElementById('mobileNav').classList.remove('open'); }
+function toggleMobileNav() { document.getElementById('mobileNav').classList.toggle('open'); }
+function closeMobileNav()   { document.getElementById('mobileNav').classList.remove('open'); }
 </script>
 </body>
 </html>
