@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Harish K — AI Developer</title>
+<title>Harish K - AI Developer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/devicon/2.16.0/devicon.min.css"/>
 <style>
 /* ══════════════════════════════════════
-   TOKENS — Tesla-style: black canvas,
+   TOKENS - Tesla-style: black canvas,
    monochrome surfaces, one red accent
 ══════════════════════════════════════ */
 :root {
@@ -47,7 +47,7 @@ body {
 h1,h2,h3,h4 { font-family:'Inter',sans-serif; font-weight:700; }
  
 /* ══════════════════════════════════════
-   AMBIENT — studio-light vignette, hero only
+   AMBIENT - studio-light vignette, hero only
 ══════════════════════════════════════ */
 #hero { position: relative; overflow: hidden; }
 #hero::before {
@@ -130,7 +130,7 @@ nav {
 .mobile-resume-btn { background:transparent; border:1px solid rgba(255,255,255,0.35); color:var(--text); }
  
 /* ══════════════════════════════════════
-   CARD BASE — flat dark panel, hairline border
+   CARD BASE - flat dark panel, hairline border
 ══════════════════════════════════════ */
 .glass {
   background: var(--surface);
@@ -178,7 +178,7 @@ section {
 }
  
 /* ══════════════════════════════════════
-   ICON BADGES — monochrome, one style
+   ICON BADGES - monochrome, one style
 ══════════════════════════════════════ */
 .icon-badge {
   width:38px; height:38px; border-radius:10px;
@@ -191,7 +191,7 @@ section {
 .ib-violet, .ib-gold, .ib-rose, .ib-green, .ib-blue { background: rgba(255,255,255,0.07); color:#fff; }
  
 /* ══════════════════════════════════════
-   HERO — Tesla-style: full-bleed, centered,
+   HERO - Tesla-style: full-bleed, centered,
    spec strip instead of bento grid
 ══════════════════════════════════════ */
 #hero {
@@ -247,7 +247,7 @@ section {
 .social-chip:hover { color:var(--text); border-color:rgba(255,255,255,0.3); background:rgba(255,255,255,0.09); }
 .social-chip svg { flex-shrink:0; }
  
-/* spec strip — Tesla "Range / Top Speed / 0-60" style */
+/* spec strip - Tesla "Range / Top Speed / 0-60" style */
 .spec-strip {
   width:100%; max-width:780px;
   display:flex; align-items:stretch; justify-content:center;
@@ -523,7 +523,7 @@ section {
 .hack-icon svg { width:20px; height:20px; }
  
 /* ══════════════════════════════════════
-   EDUCATION — spec-sheet row table
+   EDUCATION - spec-sheet row table
    (replaces the old vertical timeline)
 ══════════════════════════════════════ */
 #education { background:var(--bg2); }
@@ -562,7 +562,7 @@ section {
 .edu-stat-lbl { font-size: 11px; font-weight:600; letter-spacing:1.4px; text-transform:uppercase; color:var(--text3); white-space:nowrap; }
  
 /* ══════════════════════════════════════
-   CONTACT — two-column card layout
+   CONTACT - two-column card layout
 ══════════════════════════════════════ */
 #contact {
   background: var(--bg2);
@@ -624,7 +624,7 @@ section {
 .contact-detail-lbl { font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--text3); margin-bottom: 2px; }
 .contact-detail-val { font-size: 13px; font-weight: 600; color: var(--text); }
  
-/* right panel — message form */
+/* right panel - message form */
 .contact-form-panel {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -723,7 +723,7 @@ footer {
   .nav-links, .nav-actions { display:none; }
   .nav-hamburger { display:flex; }
  
-  /* KEY FIX: mobile-nav must NOT just be display:flex — that makes the
+  /* KEY FIX: mobile-nav must NOT just be display:flex - that makes the
      invisible closed drawer sit over the whole page and swallow every tap.
      Instead keep pointer-events:none + visibility:hidden (set on base style)
      and only flip them via .open. We still need display:flex so flex-direction works. */
@@ -737,7 +737,7 @@ footer {
   .hero-social { gap:8px; }
   .social-chip { font-size:11px; padding:7px 12px; }
  
-  /* Spec strip — stack vertically */
+  /* Spec strip - stack vertically */
   .spec-strip { padding:20px 0; flex-direction:column; }
   .spec-item { flex:1 1 100%; padding:14px 0; align-items:flex-start; padding-left:12px; }
   .spec-item + .spec-item::before { display:none; }
@@ -837,7 +837,7 @@ footer {
     <p class="hero-role-line">
       <span id="typed-text"></span><span class="cursor">|</span>
     </p>
-    <p class="hero-desc">Building intelligent systems that quietly make someone's life easier — from AI-powered government portals to food redistribution platforms at national scale.</p>
+    <p class="hero-desc">Building intelligent systems that quietly make someone's life easier from AI-powered government portals to food redistribution platforms at national scale.</p>
     <div class="hero-ctas">
       <a href="#projects" class="btn-primary">View Projects</a>
       <a href="#contact"  class="btn-ghost2">
@@ -872,8 +872,8 @@ footer {
     <!-- LEFT: bio + info grid -->
     <div class="about-main glass reveal">
       <h3 class="about-subtitle">AI &amp; Data Science Undergrad</h3>
-      <p class="about-body">I'm a third-year AI &amp; Data Science student at SVCE, Chennai — actively building projects that sit at the intersection of intelligent systems and real-world impact. From reducing a 7-day government certificate process to 15 minutes, to saving 3,000+ meals from going to waste, I build things that matter.</p>
-      <p class="about-body">I believe the best technology is invisible — it quietly solves a real problem without asking the user to understand how it works.</p>
+      <p class="about-body">I'm a third-year AI &amp; Data Science student at SVCE, Chennai - actively building projects that sit at the intersection of intelligent systems and real-world impact. From reducing a 7-day government certificate process to 15 minutes, to saving 3,000+ meals from going to waste, I build things that matter.</p>
+      <p class="about-body">I believe the best technology is invisible - it quietly solves a real problem without asking the user to understand how it works.</p>
  
       <div class="about-info-grid">
         <div class="info-tile"><div class="info-tile-lbl">Name</div><div class="info-tile-val">Harish K</div></div>
@@ -889,7 +889,7 @@ footer {
     <!-- RIGHT: quote + spec -->
     <div class="about-right">
       <div class="quote-glass glass reveal rd1">
-        <p class="quote-text">"The best technology is the kind that <strong>quietly makes someone's life easier</strong> — built with purpose, not just code."</p>
+        <p class="quote-text">"The best technology is the kind that <strong>quietly makes someone's life easier</strong> - built with purpose, not just code"</p>
         <div class="quote-who">
           <div class="quote-av">HK</div>
           <div>
@@ -1030,7 +1030,7 @@ footer {
 <section id="projects">
   <div class="eyebrow reveal">Selected Work</div>
   <h2 class="section-title reveal">Projects that solve<br><span class="grad">real problems.</span></h2>
-  <p class="section-sub reveal">Each project was built around a specific pain point — click any card for the full breakdown.</p>
+  <p class="section-sub reveal">Each project was built around a specific pain point - click any card for the full breakdown.</p>
  
   <div class="projects-list">
  
@@ -1040,7 +1040,7 @@ footer {
         <p class="proj-num">Project 01</p>
         <h3 class="proj-title">AI Agent for Government E-Seva Services</h3>
         <span class="proj-tag tag-v">AI / Public Services</span>
-        <p class="proj-desc">A voice-first, multilingual AI agent automating government certificate applications end-to-end — DigiLocker document fetching to legally-valid eSign via OTP. Reduces a 7–15 day process to 15 minutes, across 22 Indian languages.</p>
+        <p class="proj-desc">A voice-first, multilingual AI agent automating government certificate applications end-to-end - DigiLocker document fetching to legally-valid eSign via OTP. Reduces a 7–15 day process to 15 minutes, across 22 Indian languages.</p>
         <button class="proj-expand-btn">Details <span class="arr">↓</span></button>
       </div>
       <div class="project-detail">
@@ -1049,14 +1049,14 @@ footer {
             <p class="detail-head">The Problem</p>
             <ul class="detail-list prob">
               <li>3–5 physical visits per application; 7–15 days to process</li>
-              <li>35% rejection rate — errors and incomplete forms</li>
+              <li>35% rejection rate - errors and incomplete forms</li>
               <li>English-only portals with no service guidance</li>
               <li>₹300/visit × 3 visits = lost daily wages for rural citizens</li>
             </ul>
             <br/>
             <p class="detail-head">The Solution</p>
             <ul class="detail-list">
-              <li>Zero visits — fully online, 15-minute process</li>
+              <li>Zero visits - fully online, 15-minute process</li>
               <li>22 Indian languages + voice support via Bhashini API</li>
               <li>DigiLocker auto-fetch + legally valid eSign via OTP</li>
               <li>AI recommends exact service &amp; validates documents in real-time</li>
@@ -1074,7 +1074,7 @@ footer {
         </div>
       </div>
  
-      <!-- SCREENSHOTS — replace src with your actual image paths -->
+      <!-- SCREENSHOTS - replace src with your actual image paths -->
       <div class="proj-screenshots">
         <span class="proj-screenshots-label">Project Screenshots</span>
         <div class="screenshot-track">
@@ -1108,9 +1108,9 @@ footer {
     <div class="project-card reveal rd1">
       <div class="project-header" onclick="toggleProject(this.closest('.project-card'))" style="cursor:pointer;">
         <p class="proj-num">Project 02</p>
-        <h3 class="proj-title">Foody — National Surplus Food Redistribution Platform</h3>
+        <h3 class="proj-title">Foody - National Surplus Food Redistribution Platform</h3>
         <span class="proj-tag tag-c">AI / Social Impact</span>
-        <p class="proj-desc">An AI-enabled platform connecting hotels, consumers, and NGOs to redistribute surplus food safely. Real-time risk scoring, automated expiry-to-NGO transfer, and OCR-based food safety verification — reducing food wastage at scale.</p>
+        <p class="proj-desc">An AI-enabled platform connecting hotels, consumers, and NGOs to redistribute surplus food safely. Real-time risk scoring, automated expiry-to-NGO transfer, and OCR-based food safety verification - reducing food wastage at scale.</p>
         <button class="proj-expand-btn">Details <span class="arr">↓</span></button>
       </div>
       <div class="project-detail">
@@ -1119,7 +1119,7 @@ footer {
             <p class="detail-head">How It Works</p>
             <ul class="detail-list">
               <li>Hotel uploads food with quantity, expiry, price</li>
-              <li>Consumers order — inventory reduces in real-time</li>
+              <li>Consumers order - inventory reduces in real-time</li>
               <li>Automated check every minute detects near-expiry food</li>
               <li>Unsold food auto-transferred to nearest NGO for pickup</li>
             </ul>
@@ -1143,7 +1143,7 @@ footer {
         </div>
       </div>
  
-      <!-- SCREENSHOTS — replace src with your actual image paths -->
+      <!-- SCREENSHOTS - replace src with your actual image paths -->
       <div class="proj-screenshots">
         <span class="proj-screenshots-label">Project Screenshots</span>
         <div class="screenshot-track">
@@ -1179,7 +1179,7 @@ footer {
         <p class="proj-num">Project 03</p>
         <h3 class="proj-title">AI-Powered Food Demand Forecasting System</h3>
         <span class="proj-tag tag-a">AI / SDG</span>
-        <p class="proj-desc">ML-based decision support platform predicting daily food demand for college hostels using historical data and contextual signals. Gives mess administrators a clean dashboard with actionable prep insights — no ML expertise required.</p>
+        <p class="proj-desc">ML-based decision support platform predicting daily food demand for college hostels using historical data and contextual signals. Gives mess administrators a clean dashboard with actionable prep insights - no ML expertise required.</p>
         <button class="proj-expand-btn">Details <span class="arr">↓</span></button>
       </div>
       <div class="project-detail">
@@ -1212,7 +1212,7 @@ footer {
         </div>
       </div>
  
-      <!-- SCREENSHOTS — replace src with your actual image paths -->
+      <!-- SCREENSHOTS - replace src with your actual image paths -->
       <div class="proj-screenshots">
         <span class="proj-screenshots-label">Project Screenshots</span>
         <div class="screenshot-track">
@@ -1249,7 +1249,7 @@ footer {
 <section id="achievements">
   <div class="eyebrow reveal">Recognition</div>
   <h2 class="section-title reveal">Built under pressure.<br><span class="grad">Recognized on stage.</span></h2>
-  <p class="section-sub reveal">Wins and recognitions from 7 hackathons across IITs, IIITs, and top engineering colleges — with more on the way.</p>
+  <p class="section-sub reveal">Wins and recognitions from 7 hackathons across IITs, IIITs, and top engineering colleges - with more on the way.</p>
  
   <div class="hack-bento">
  
@@ -1304,7 +1304,7 @@ footer {
   </div>
 </section>
  
-<!-- ══════════ EDUCATION — spec-sheet rows ══════════ -->
+<!-- ══════════ EDUCATION - spec-sheet rows ══════════ -->
 <section id="education">
   <div class="eyebrow reveal">Academic Record</div>
   <h2 class="section-title reveal">Education &amp;<br><span class="grad">Qualifications.</span></h2>
